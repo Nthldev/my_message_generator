@@ -3,6 +3,7 @@ const generateRandomNumber = num => {
     return Math.floor(Math.random() * num);
 }
 
+//objeto para armazenar as frases em tipos e torná-las facilmente iteraveis
 const sabedoria = {
   acolhimento: [
     "Sei que esse momento é pesado e obscuro, mas quando superá-lo (e irá superá-lo!) você se tornará ainda mais forte!",
@@ -21,11 +22,33 @@ const sabedoria = {
   ]
 };
 
+//variavel para armazenar as frases criadas aleatoriamente
+let mensagemIncentivoResultado = [];
 
+//iterar pelo objeto com as frases e criar as mensagens aleatorias e armazenar na variavel de resultado
+for (let tipo in sabedoria) {
+    let optionIdx = generateRandomNumber(sabedoria[tipo].length);
 
-//função para logar a mensagem na tela
-const mensagemIncentivo = () => {
-    console.log("testando");
+    switch(tipo) {
+        case 'acolhimento':
+            mensagemIncentivoResultado.push(`Está passando por um momento super difícil? ${sabedoria[tipo][optionIdx]}`);
+            break;
+        case 'elogio':
+            mensagemIncentivoResultado.push(`Olhe para si: ${sabedoria[tipo][optionIdx]}`);
+            break;
+        case 'motivacao':
+            mensagemIncentivoResultado.push(`O momento é agora! ${sabedoria[tipo][optionIdx]}`);
+            break;
+        default:
+            mensagemIncentivoResultado.push(`Não há informação suficiente para gerar a mensagem completa`);
+    }
 }
 
-mensagemIncentivo();
+//função para juntar td e logar a mensagem na tela
+const juntarMensagemIncentivo = (mensagem) => {
+    const formatted = mensagem.join('\n');
+    console.log(formatted);
+    }
+
+//chama a função para logar a mensagem aleatoria de incentivo na tela    
+juntarMensagemIncentivo(mensagemIncentivoResultado);
